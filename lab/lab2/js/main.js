@@ -14,7 +14,6 @@ var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{
   ext: 'png'
 }).addTo(map);
 
-
 /* =====================
 
 ## Task 1
@@ -23,6 +22,7 @@ Load the dataset into our application. Set the 'dataset' variable to
 https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson
 
 You should now have GeoJSON data projected onto your map!
+
 
 ## Task 2
 
@@ -123,11 +123,24 @@ of the application to report this information.
 
 ===================== */
 
-var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson"
+var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson";
 var featureGroup;
-
 var myStyle = function(feature) {
-  return {};
+  if (feature.properties.COLLDAY==='MON') {
+    return {'fillColor':'blue'};
+  }
+  else if (feature.properties.COLLDAY==='TUE'){
+    return {'fillColor':'yellow'};
+  }
+  else if (feature.properties.COLLDAY==='WED'){
+    return {'fillColor':'green'};
+  }
+  else if (feature.properties.COLLDAY==='THU'){
+    return {'fillColor':'purple'};
+  }
+  else if (feature.properties.COLLDAY==='FRI'){
+    return {'fillColor':'red'};
+  }
 };
 
 var showResults = function() {
@@ -144,21 +157,47 @@ var showResults = function() {
 };
 
 
-var eachFeatureFunction = function(layer) {
-  layer.on('click', function (event) {
     /* =====================
     The following code will run every time a layer on the map is clicked.
     Check out layer.feature to see some useful data about the layer that
     you can use in your application.
     ===================== */
-    console.log(layer.feature);
-    showResults();
+ var eachFeatureFunction = function(layer) {
+    layer.on('click', function (event) {
+      console.log(layer.feature);
+      switch (layer.feature.properties.COLLDAY){
+        case 'MON':
+          $('.day-of-week').text('Monday');
+          break;
+        case 'TUE':
+          $('.day-of-week').text('Tuesday');
+          break;
+        case 'WED':
+          $('.day-of-week').text('Wednesday');
+          break;
+        case 'THU':
+          $('.day-of-week').text('Thursday');
+          break;
+        case 'FRI':
+          $('.day-of-week').text('Friday');
+          break;
+    // showResults();
+    }
   });
 };
 
+// var myLayer = L.geoJSON().addTo(map);
+// myLayer.addData(geojsonFeature);
+
 var myFilter = function(feature) {
-  return true;
+  if (feature.properties.COLLDAY===' ') {
+  return false;
+  }
+  else {
+    return true;
+  }
 };
+
 
 $(document).ready(function() {
   $.ajax(dataset).done(function(data) {
@@ -169,6 +208,7 @@ $(document).ready(function() {
     }).addTo(map);
 
     // quite similar to _.each
+    console.log(parsedData);
     featureGroup.eachLayer(eachFeatureFunction);
   });
 });
