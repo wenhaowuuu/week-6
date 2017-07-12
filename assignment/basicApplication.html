@@ -11,30 +11,23 @@
     <div style="position: absolute; left: 0px; width: 400px; top: 0; bottom: 0;">
         <h1 id="main-heading">Comparing <span id="bolded">Economic Development</span> among Chinese Cities</h1>
         <br>
-        <label id="number-label" for="numeric-input">What is the poverty line</label>
-        <input type="number" id="numeric-input" placeholder="poverty line" disabled>
-        <br>
-        <br>
-        GDP filter: <input id="num1" type="number" name="num1" value=""> to <input id="num2" type="number" name="num2" value="">
-        <br>
-        Population filter: <input id="numb1" type="number">
-        <br>
-        Income filter: <input id="numb2" type="number">
-        <br>
-        <button id="my-button">Cities with income above your poverty line</button>
+        <!-- <label id="number-label" for="numeric-input">What is the poverty line</label>
+        <input type="number" id="numeric-input" placeholder="poverty line" disabled> -->
+        <p id="GDP">
+          If you click on Next, it will show the cities with high level GDP.
+        </p>
+        <p id="GDPafter" style="display: none;">
+          If you click on Previous, it will show all the cities.
+        </p>
         <br>
         <button id="nextButton">Next<button>
         <br>
         <button id="previousButton">Previous<button>
         <br>
-        <button id="SaynameButton">Report Slide Name<button>
-        <br>
-      <button>
 
     </div>
     <!-- Map -->
     <div id="map" style="position: absolute; right: 0; left: 400px; top: 0; bottom: 0;"></div>
-
     <!-- End HTML -->
 
     <!-- Start Javascript Imports -->

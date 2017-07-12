@@ -32,3 +32,5 @@ var combineNames = function(str1,str2){
 var produceArray = function(){
   var array = [2,3,5,7];
 };
+
+// var nValuesLogged = function(n: number,values: array){}

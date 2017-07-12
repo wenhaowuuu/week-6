@@ -17,10 +17,20 @@ console. For example, try running: clickNextButton() and see what it does. Use l
 /* =====================
   Global Variables
 ===================== */
-var data = EconomicIndicator_Chinesecities;  // for holding data
-var stringFilter = "";
-var selectValue = 'All';
+var map = L.map('map', {
+  center: [32.9670, 117.5370],
+  zoom: 5
+});
 
+var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  minZoom: 0,
+  maxZoom: 20,
+  ext: 'png'
+}).addTo(map);
+
+var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson";
 /* =====================
   Map Setup
 ===================== */
@@ -30,28 +40,7 @@ var selectValue = 'All';
 //   zoom: 2
 // };
 // var map = L.map('map', mapOpts);
-
-var map = L.map('map', {
-  center: [32.9670, 117.5370],
-  zoom: 5
-});
-
-// Another options object
-// var tileOpts = {
-//   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-//   subdomains: 'abcd',
-//   minZoom: 0,
-//   maxZoom: 20,
-//   ext: 'png'
-// };
-
-var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-}).addTo(map);
+L.geoJSON(ChineseCities).addTo(map);
 
 var state = {
   "slideNumber": 0, // slideNumber keeps track of what slide you are on. It should increase when you
@@ -93,7 +82,7 @@ var clickPreviousButton = function() {
   }
 };
 
-var saySlideName = function() {
+var saySlideName = function(){
     console.log(state.slideData.name);
   // saySlideName uses console.log to "say" the name of the slide it is given. It should run when
   // someone clicks on one of the buttons.

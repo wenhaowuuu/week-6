@@ -5,7 +5,12 @@ body {
 }
 
 p.main {
-  font-size: 24px;
+  font-size: 20px;
+}
+
+p.annotation {
+  font-style:italic;
+  font-size: 12px;
 }
 
 .map {
